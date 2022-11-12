@@ -32,14 +32,25 @@ app.get('/', (req, res) => {
 
 
 app.post('/output', (req, res) => {
-  
+  if (!req.body.input) {
+    return res.redirect("/")
+  }
+  const input = req.body.input
+  //console.log(input)
 
-  const output = generateShorten()
-  req.body.output = output
-  //console.log(req.body)
-
-  return Short.create(req.body)
-    .then(() => res.render('output', { output }))
+  Short.findOne({ input })
+    .then(data => {
+      if (data) {
+        console.log('already exist')
+        return data.output
+      } else {
+        const output = generateShorten()
+        req.body.output = output
+        Short.create(req.body)
+        return output
+      }
+    })
+    .then(output => res.render('output', { output }))
     .catch(error => console.log(error))
 
 })

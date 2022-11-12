@@ -6,7 +6,7 @@ function sample(array) {
 
 // define generatePassword function
 function generateShorten() {
-    console.log('This function will generate password')
+    //console.log('This function will generate password')
 
     // define things user might want
         const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz'
@@ -21,7 +21,7 @@ function generateShorten() {
     for (let i = 0; i < Number(5); i++) {
         password += sample(collection)
     }
-    console.log(password)
+    //console.log(password)
     //store into database
     
     return password

@@ -1,6 +1,12 @@
-<input type="text" name="name" id="name" value="{{short.input}}" required>
-<div class="side-links">
-        
-  <button type="submit" class="btn btn-outline-primary mt-3">Shorten</button>
-        
-</div>
+<form action="/output" method="POST">
+  <h1><label for="name">URL Shortener</label></h1>
+  <p>
+    <img width="300" src="https://assets-lighthouse.alphacamp.co/uploads/image/file/16716/ExportedContentImage_00.png">
+  </p>
+
+  <input type="text" name="input" id="name" required />
+  <div>
+    <button type="submit" class="btn btn-outline-primary mt-3">Shorten</button>
+  </div>
+
+</form>

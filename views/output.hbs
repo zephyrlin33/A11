@@ -1,6 +1,21 @@
+<h1><label for="name">URL Shortener</label></h1>
+<p>
+      <img width="300"
+            src="https://assets-lighthouse.alphacamp.co/uploads/image/file/16716/ExportedContentImage_00.png">
+</p>
+
 <h1>Success! Please use this Link</h1>
 
-      <h2 class="text-primary">https://your-project-name.herokuapp.com/{{{output}}}</h2>
+<h2 id="generatedURL" class="text-primary">http://localhost:3000/{{{output}}}</h2>
 <div>
-<a class="btn btn-primary mt-3" href="#" role="button">Copy</a>
+      <button class="btn btn-primary mt-3" onclick="copy()" role="button">Copy</button>
 </div>
+
+<script>
+      function copy() {
+            const URL = document.getElementById("generatedURL")
+            navigator.clipboard.writeText(URL.innerText)
+                  .then(() => alert('copied'))
+                  .catch(error => console.log(error))
+      }
+</script>

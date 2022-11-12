@@ -1,10 +1,7 @@
-// app.js
-// include packages and define server related variables
 const express = require('express')
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose') // 載入 mongoose
-const Short = require('./models/shorten.js') // 載入 model
-//const bodyParser = require('body-parser')過時
+const Short = require('./models/shorten') // 載入 model
 const generateShorten = require('./generate_shorten.js')
 
 const app = express()
@@ -25,32 +22,35 @@ db.once('open', () => {
 // setting template engine
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
-
-// setting body-parser
 app.use(express.urlencoded({ extended: true }))
 
 // setting routes
 app.get('/', (req, res) => {
-    //console.log('get form GET request')
-    res.render('index')
+  //console.log('get form GET request')
+  res.render('index')
 })
 
-app.post('/',(req,res) => {
-  if (!req.body.url) return res.redirect("/")//錯誤處理
-//const {input}=req.params
-    console.log(req.params)
-})
 
 app.post('/output', (req, res) => {
-    const output = generateShorten()
-    res.render('output', {output})
-    
-    Short.create(req.body)
-    .then()
-    .catch(error => console.log(error))
-    
-  })
+  
 
+  const output = generateShorten()
+  req.body.output = output
+  //console.log(req.body)
+
+  return Short.create(req.body)
+    .then(() => res.render('output', { output }))
+    .catch(error => console.log(error))
+
+})
+
+app.get('/:newURL', (req, res) => {
+
+  const { newURL } = req.params
+  Short.findOne({ output: newURL })
+    .then(data => res.redirect(data.input))
+    .catch(error => console.log(error))
+})
 
 // starts the express server and listening for connections.
 app.listen(port, () => {

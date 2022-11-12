@@ -2,11 +2,11 @@
 
 可以在瀏覽器的網址列，輸入你提供的短網址，瀏覽器就會導向原本的網站
 
-#安裝步驟
+# 安裝步驟
 
 1. 將專案 clone 到本地
 ```
-git clone  
+git clone https://github.com/zephyrlin33/A11.git
 ```
 2.安裝npm 
 ```
@@ -20,7 +20,7 @@ npm run dev
 ```
 Ctrl+C
 ```
-#使用工具
+# 使用工具
 
 1. express v4.18.2
 2. express-handlebars v3.1.0

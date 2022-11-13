@@ -59,7 +59,17 @@ app.get('/:newURL', (req, res) => {
 
   const { newURL } = req.params
   Short.findOne({ output: newURL })
-    .then(data => res.redirect(data.input))
+    .then(data => {
+      if (!data) {
+        return res.render('error', {
+          errorMsg: `Can't found the URL`,
+          errorURL: req.headers.host + '/' + newURL,
+        })
+      }
+      else {
+        res.redirect(data.input)
+      }
+    })
     .catch(error => console.log(error))
 })
 
